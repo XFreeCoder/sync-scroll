@@ -2,7 +2,7 @@
   "name": "@sync-scroll/core",
   "version": "0.0.0",
   "main": "./index.ts",
-  "types": "./index.ts",
+  "types": "./types.ts",
   "license": "MIT",
   "scripts": {
     "lint": "eslint *.ts*"
