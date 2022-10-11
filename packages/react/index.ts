@@ -8,6 +8,7 @@ export type UseSyncScrollOptions = {
 export function useSyncScroll({ synchronizerOptions }: UseSyncScrollOptions) {
   useEffect(() => {
     const synchronizer = new Synchronizer(synchronizerOptions);
-    () => synchronizer.unbind();
+    synchronizer.registerScrollHandler();
+    () => synchronizer.unregisterScrollHandler();
   }, [synchronizerOptions]);
 }

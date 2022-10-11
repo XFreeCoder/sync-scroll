@@ -16,7 +16,6 @@ export class Synchronizer {
     this.elements = elements;
     this.syncDirection = syncDirection;
     this.handlers = this.buildHandlers();
-    this.bind();
   }
 
   private buildHandlers(): Map<ScrollElement, ScrollHandler> {
@@ -25,13 +24,7 @@ export class Synchronizer {
     this.elements.forEach((element) => {
       const handler: ScrollHandler = (ratio) => {
         const elements = this.elements.filter((ele) => ele !== element);
-        elements.forEach((element) => {
-          element.unregisterScrollHandler();
-        });
-        this.sync(elements, ratio);
-        elements.forEach((element) => {
-          element.registerScrollHandler(handlers.get(element)!);
-        });
+        this._scrollTo(elements, ratio);
       };
 
       handlers.set(element, handler);
@@ -53,19 +46,33 @@ export class Synchronizer {
     });
   }
 
-  private bind() {
-    this.elements.forEach((element) => {
+  private bind(elements: Array<ScrollElement>) {
+    elements.forEach((element) => {
       element.registerScrollHandler(this.handlers.get(element)!);
     });
   }
 
-  unbind() {
-    this.elements.forEach((element) => {
+  private unbind(elements: Array<ScrollElement>) {
+    elements.forEach((element) => {
       element.unregisterScrollHandler();
     });
   }
 
+  registerScrollHandler() {
+    this.bind(this.elements);
+  }
+
+  unregisterScrollHandler() {
+    this.unbind(this.elements);
+  }
+
+  private _scrollTo(elements: Array<ScrollElement>, ratio: ScrollRatio) {
+    this.unbind(elements);
+    this.sync(elements, ratio);
+    this.bind(elements);
+  }
+
   scrollTo(ratio: ScrollRatio) {
-    this.sync(this.elements, ratio);
+    this._scrollTo(this.elements, ratio);
   }
 }
