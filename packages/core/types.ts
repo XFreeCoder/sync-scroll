@@ -7,9 +7,9 @@ export type ScrollRatio = {
 
 export type ScrollHandler = (ratio: ScrollRatio) => void;
 
-export interface ScrollElement {
-  setVerticalRatio: (ratio: Ratio) => void;
-  setHorizontalRatio: (ratio: Ratio) => void;
+export interface ScrollableElement {
+  scrollVertical: (ratio: Ratio) => void;
+  scrollHorizontal: (ratio: Ratio) => void;
   registerScrollHandler: (handler: ScrollHandler) => void;
   unregisterScrollHandler: () => void;
 }
@@ -17,5 +17,5 @@ export interface ScrollElement {
 export type SyncDirection = "vertical" | "horizontal" | "both";
 
 export type SynchronizerOptions = {
-  syncDirection?: SyncDirection;
+  direction?: SyncDirection;
 };

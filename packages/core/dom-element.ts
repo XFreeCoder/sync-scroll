@@ -1,16 +1,16 @@
 import { Ratio } from "./ratio";
-import { ScrollElement, ScrollHandler } from "./types";
+import { ScrollableElement, ScrollHandler } from "./types";
 
-export class DOMElement implements ScrollElement {
+export class DOMElement implements ScrollableElement {
   private listener: EventListener | null = null;
 
   constructor(private element: HTMLElement) {}
 
-  setVerticalRatio(ratio: Ratio) {
+  scrollVertical(ratio: Ratio) {
     this.element.scrollTop = ratio.value * this.element.scrollHeight;
   }
 
-  setHorizontalRatio(ratio: Ratio) {
+  scrollHorizontal(ratio: Ratio) {
     this.element.scrollLeft = ratio.value * this.element.scrollWidth;
   }
 

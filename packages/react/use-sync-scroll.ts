@@ -1,4 +1,4 @@
-import { Synchronizer, DOMElement, ScrollElement } from "@sync-scroll/core";
+import { Synchronizer, DOMElement, ScrollableElement } from "@sync-scroll/core";
 import { useCallback, useRef } from "react";
 
 export type UseSyncScrollOptions = {
@@ -6,7 +6,7 @@ export type UseSyncScrollOptions = {
 };
 
 export function useSyncScroll({ synchronizer }: UseSyncScrollOptions) {
-  const scrollElementRef = useRef<ScrollElement | null>(null);
+  const scrollElementRef = useRef<ScrollableElement | null>(null);
 
   const elementRef = useCallback(
     (element) => {
