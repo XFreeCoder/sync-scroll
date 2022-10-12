@@ -1,4 +1,3 @@
-import { Ratio } from "./ratio";
 import {
   ScrollElement,
   ScrollHandler,
@@ -8,71 +7,42 @@ import {
 } from "./types";
 
 export class Synchronizer {
-  private elements: Array<ScrollElement>;
   private syncDirection: SyncDirection;
   private handlers: Map<ScrollElement, ScrollHandler>;
+  private countLock: number;
 
-  constructor({ elements, syncDirection = "vertical" }: SynchronizerOptions) {
-    this.elements = elements;
+  constructor({ syncDirection = "vertical" }: SynchronizerOptions) {
     this.syncDirection = syncDirection;
-    this.handlers = this.buildHandlers();
+    this.handlers = new Map();
+    this.countLock = 0;
   }
 
-  private buildHandlers(): Map<ScrollElement, ScrollHandler> {
-    const handlers = new Map<ScrollElement, ScrollHandler>();
-
-    this.elements.forEach((element) => {
-      const handler: ScrollHandler = (ratio) => {
-        const elements = this.elements.filter((ele) => ele !== element);
-        this._scrollTo(elements, ratio);
-      };
-
-      handlers.set(element, handler);
-    });
-
-    return handlers;
-  }
-
-  private sync(elements: Array<ScrollElement>, ratio: ScrollRatio) {
-    elements.forEach((element) => {
-      if (this.syncDirection === "vertical") {
-        element.setVerticalRatio(ratio.verticalRatio);
-      } else if (this.syncDirection === "horizontal") {
-        element.setHorizontalRatio(ratio.horizontalRatio);
+  register(element: ScrollElement) {
+    const handler = (ratio: ScrollRatio) => {
+      if (this.countLock === 0) {
+        this.countLock = this.handlers.size - 1;
+        [...this.handlers.keys()]
+          .filter((ele) => ele !== element)
+          .forEach((otherElement) => {
+            if (this.syncDirection === "vertical") {
+              otherElement.setVerticalRatio(ratio.verticalRatio);
+            } else if (this.syncDirection === "horizontal") {
+              otherElement.setHorizontalRatio(ratio.horizontalRatio);
+            } else {
+              otherElement.setVerticalRatio(ratio.verticalRatio);
+              otherElement.setHorizontalRatio(ratio.horizontalRatio);
+            }
+          });
       } else {
-        element.setVerticalRatio(ratio.verticalRatio);
-        element.setHorizontalRatio(ratio.horizontalRatio);
+        this.countLock = this.countLock - 1;
       }
-    });
+    };
+    element.registerScrollHandler(handler);
+    this.handlers.set(element, handler);
   }
 
-  private bind(elements: Array<ScrollElement>) {
-    elements.forEach((element) => {
-      element.registerScrollHandler(this.handlers.get(element)!);
-    });
-  }
-
-  private unbind(elements: Array<ScrollElement>) {
-    elements.forEach((element) => {
-      element.unregisterScrollHandler();
-    });
-  }
-
-  registerScrollHandler() {
-    this.bind(this.elements);
-  }
-
-  unregisterScrollHandler() {
-    this.unbind(this.elements);
-  }
-
-  private _scrollTo(elements: Array<ScrollElement>, ratio: ScrollRatio) {
-    this.unbind(elements);
-    this.sync(elements, ratio);
-    this.bind(elements);
-  }
-
-  scrollTo(ratio: ScrollRatio) {
-    this._scrollTo(this.elements, ratio);
+  unregister(element: ScrollElement) {
+    element.unregisterScrollHandler();
+    this.handlers.delete(element);
   }
 }
