@@ -10,7 +10,7 @@ export function useSyncScroll({ synchronizer }: UseSyncScrollOptions) {
   const scrollElementRef = useRef<ScrollableElement | null>(null);
 
   const elementRef = useCallback(
-    (element) => {
+    (element: HTMLElement | null) => {
       if (element !== null) {
         const scrollElement = new DOMElement(element);
         synchronizer.register(scrollElement);
