@@ -78,6 +78,21 @@ importers:
       tsconfig: link:../tsconfig
       typescript: 4.7.4
 
+  packages/dom:
+    specifiers:
+      '@sync-scroll/core': workspace:*
+      eslint: ^7.32.0
+      eslint-config-custom: workspace:*
+      tsconfig: workspace:*
+      typescript: ^4.5.2
+    dependencies:
+      '@sync-scroll/core': link:../core
+    devDependencies:
+      eslint: 7.32.0
+      eslint-config-custom: link:../eslint-config-custom
+      tsconfig: link:../tsconfig
+      typescript: 4.7.4
+
   packages/eslint-config-custom:
     specifiers:
       eslint: ^7.23.0
@@ -98,6 +113,7 @@ importers:
   packages/react:
     specifiers:
       '@sync-scroll/core': workspace:*
+      '@sync-scroll/dom': workspace:*
       eslint: ^7.32.0
       eslint-config-custom: workspace:*
       react: ^18.2.0
@@ -105,6 +121,7 @@ importers:
       typescript: ^4.5.2
     dependencies:
       '@sync-scroll/core': link:../core
+      '@sync-scroll/dom': link:../dom
     devDependencies:
       eslint: 7.32.0
       eslint-config-custom: link:../eslint-config-custom
@@ -1712,7 +1729,7 @@ packages:
     resolution: {integrity: sha1-WjUNoLERO4N+z//VgSy+WNbq4ZM=}
 
   /loose-envify/1.4.0:
-    resolution: {integrity: sha512-lyuxPGr/Wfhrlem2CL/UcnUc1zcqKAImBDzukY7Y5F/yQiNdko6+fRLevlw1HgMySw7f611UIY408EtxRSoK3Q==, tarball: http://registry.npm.sbuild.cn:80/loose-envify/-/loose-envify-1.4.0.tgz}
+    resolution: {integrity: sha512-lyuxPGr/Wfhrlem2CL/UcnUc1zcqKAImBDzukY7Y5F/yQiNdko6+fRLevlw1HgMySw7f611UIY408EtxRSoK3Q==}
     hasBin: true
     dependencies:
       js-tokens: 4.0.0
@@ -2012,7 +2029,7 @@ packages:
     dev: false
 
   /react/18.2.0:
-    resolution: {integrity: sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ==, tarball: http://registry.npm.sbuild.cn:80/react/-/react-18.2.0.tgz}
+    resolution: {integrity: sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ==}
     engines: {node: '>=0.10.0'}
     dependencies:
       loose-envify: 1.4.0

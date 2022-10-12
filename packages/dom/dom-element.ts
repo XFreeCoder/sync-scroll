@@ -1,5 +1,4 @@
-import { Ratio } from "./ratio";
-import { ScrollableElement, ScrollHandler } from "./types";
+import { Ratio, ScrollableElement, ScrollHandler } from "@sync-scroll/core";
 
 export class DOMElement implements ScrollableElement {
   private listener: EventListener | null = null;

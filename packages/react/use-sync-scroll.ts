@@ -1,4 +1,5 @@
-import { Synchronizer, DOMElement, ScrollableElement } from "@sync-scroll/core";
+import { Synchronizer, ScrollableElement } from "@sync-scroll/core";
+import { DOMElement } from "@sync-scroll/dom";
 import { useCallback, useRef } from "react";
 
 export type UseSyncScrollOptions = {
