@@ -18,7 +18,7 @@ export class Ratio {
 
   private verifyRatio(ratio: number) {
     if (ratio < 0 || ratio > 1) {
-      throw `radio should be [0, 1], but current radio is ${ratio}`;
+      throw `ratio should be [0, 1], but current ratio is ${ratio}.`;
     }
   }
 }
