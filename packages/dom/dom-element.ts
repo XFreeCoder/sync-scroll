@@ -2,8 +2,11 @@ import { Ratio, ScrollableElement, ScrollHandler } from "@sync-scroll/core";
 
 export class DOMElement implements ScrollableElement {
   private listener: EventListener | null = null;
+  private element: Element;
 
-  constructor(private element: Element) {}
+  constructor(element: Element) {
+    this.element = element;
+  }
 
   private getScrollableHeight() {
     return this.element.scrollHeight - this.element.clientHeight;

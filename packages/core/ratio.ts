@@ -7,8 +7,8 @@ export class Ratio {
     try {
       this.verifyRatio(ratio);
       this._value = ratio;
-    } catch (e) {
-      console.error(e);
+    } catch (error) {
+      throw error;
     }
   }
 
