@@ -1,4 +1,9 @@
-import { Ratio, ScrollableElement, ScrollHandler } from "@sync-scroll/core";
+import {
+  Ratio,
+  ScrollableElement,
+  ScrollHandler,
+  ScrollRatio,
+} from "@sync-scroll/core";
 
 export class DOMElement implements ScrollableElement {
   private listener: EventListener | null = null;
@@ -22,6 +27,18 @@ export class DOMElement implements ScrollableElement {
 
   scrollHorizontal(ratio: Ratio) {
     this.element.scrollLeft = ratio.value * this.getScrollableWidth();
+  }
+
+  scrollTo(ratio: ScrollRatio) {
+    const { verticalRatio, horizontalRatio } = ratio;
+    const top = verticalRatio
+      ? verticalRatio.value * this.getScrollableWidth()
+      : undefined;
+    const left = horizontalRatio
+      ? horizontalRatio.value * this.getScrollableWidth()
+      : undefined;
+
+    this.element.scrollTo({ top, left });
   }
 
   registerScrollHandler(handler: ScrollHandler) {

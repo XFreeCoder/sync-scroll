@@ -25,12 +25,14 @@ export class Synchronizer {
           .filter((ele) => ele !== element)
           .forEach((otherElement) => {
             if (this.direction === "vertical") {
-              otherElement.scrollVertical(ratio.verticalRatio);
+              otherElement.scrollTo({ verticalRatio: ratio.verticalRatio });
             } else if (this.direction === "horizontal") {
-              otherElement.scrollHorizontal(ratio.horizontalRatio);
+              otherElement.scrollTo({ horizontalRatio: ratio.horizontalRatio });
             } else {
-              otherElement.scrollVertical(ratio.verticalRatio);
-              otherElement.scrollHorizontal(ratio.horizontalRatio);
+              otherElement.scrollTo({
+                verticalRatio: ratio.verticalRatio,
+                horizontalRatio: ratio.horizontalRatio,
+              });
             }
           });
       } else {
