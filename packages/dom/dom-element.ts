@@ -21,18 +21,10 @@ export class DOMElement implements ScrollableElement {
     return this.element.scrollWidth - this.element.clientWidth;
   }
 
-  scrollVertical(ratio: Ratio) {
-    this.element.scrollTop = ratio.value * this.getScrollableHeight();
-  }
-
-  scrollHorizontal(ratio: Ratio) {
-    this.element.scrollLeft = ratio.value * this.getScrollableWidth();
-  }
-
   scrollTo(ratio: ScrollRatio) {
     const { verticalRatio, horizontalRatio } = ratio;
     const top = verticalRatio
-      ? verticalRatio.value * this.getScrollableWidth()
+      ? verticalRatio.value * this.getScrollableHeight()
       : undefined;
     const left = horizontalRatio
       ? horizontalRatio.value * this.getScrollableWidth()
