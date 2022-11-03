@@ -7,20 +7,20 @@ import {
 } from "./types";
 
 export class Synchronizer {
-  private direction: SyncDirection;
+  private readonly direction: SyncDirection;
   private handlers: Map<ScrollableElement, ScrollHandler>;
-  private countLock: number;
+  private countDownLatch: number;
 
   constructor({ direction = "vertical" }: SynchronizerOptions) {
     this.direction = direction;
     this.handlers = new Map();
-    this.countLock = 0;
+    this.countDownLatch = 0;
   }
 
   register(element: ScrollableElement) {
     const handler = (ratio: ScrollRatio) => {
-      if (this.countLock === 0) {
-        this.countLock = this.handlers.size - 1;
+      if (this.countDownLatch === 0) {
+        this.countDownLatch = this.handlers.size - 1;
         [...this.handlers.keys()]
           .filter((ele) => ele !== element)
           .forEach((otherElement) => {
@@ -36,7 +36,7 @@ export class Synchronizer {
             }
           });
       } else {
-        this.countLock = this.countLock - 1;
+        this.countDownLatch = this.countDownLatch - 1;
       }
     };
     element.registerScrollHandler(handler);
