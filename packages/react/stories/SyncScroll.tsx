@@ -77,8 +77,8 @@ const Block = ({
           gap: 10,
         }}
       >
-        {Array.from({ length: rows * cols }).map(() => (
-          <Cell />
+        {Array.from({ length: rows * cols }).map((_, index) => (
+          <Cell key={`id_${index}`} />
         ))}
       </div>
     </div>
@@ -93,6 +93,7 @@ const SyncScroll = ({ direction }: Props) => {
   const synchronizer = useMemo(() => {
     return new Synchronizer({ direction });
   }, [direction]);
+
   return (
     <SynchronizerProvider synchronizer={synchronizer}>
       <div

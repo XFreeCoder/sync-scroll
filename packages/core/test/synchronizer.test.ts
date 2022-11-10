@@ -95,4 +95,17 @@ describe("synchronizer", () => {
     elementA.scrollTo({ verticalRatio: new Ratio(0.6) });
     expect(elementB.ratio.verticalRatio.value === 0.2);
   });
+
+  test("scrollTo", () => {
+    const synchronizer = new Synchronizer({});
+    const elementA = new FakeElement();
+    const elementB = new FakeElement();
+    synchronizer.register(elementA);
+    synchronizer.register(elementB);
+
+    synchronizer.scrollTo({ verticalRatio: new Ratio(0.2) });
+
+    expect(elementA.ratio.verticalRatio.value === 0.2);
+    expect(elementB.ratio.verticalRatio.value === 0.2);
+  });
 });

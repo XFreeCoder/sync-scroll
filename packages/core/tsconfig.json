@@ -1,17 +1,9 @@
 {
-  "include": [
-    "."
-  ],
-  "exclude": [
-    "dist",
-    "build",
-    "node_modules"
-  ],
+  "include": ["."],
+  "exclude": ["dist", "build", "node_modules"],
   "compilerOptions": {
     "esModuleInterop": true,
     "target": "ESNext",
-    "lib": [
-      "ESNext",
-    ],
+    "lib": ["ESNext"]
   }
 }
