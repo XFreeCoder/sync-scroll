@@ -1,25 +1,25 @@
 export class CountDownLatch {
-  private _count: number;
+  #count: number;
   get count() {
-    return this._count;
+    return this.#count;
   }
 
   /**
    *@description Constructs a CountDownLatch initialized with the given count.
    **/
   constructor(count: number) {
-    this._count = count;
+    this.#count = count;
   }
 
   countdown = () => {
-    this._count--;
+    this.#count--;
   };
 
-  locked = () => {
+  get locked() {
     return this.count > 0;
   };
 
-  released = () => {
-    return this.locked() === false;
+  get released() {
+    return this.locked === false;
   };
 }
