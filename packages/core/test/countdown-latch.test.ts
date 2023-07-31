@@ -14,7 +14,7 @@ describe("countdown-latch", () => {
 
   test("should locked when count > 0", () => {
     const latch = new CountDownLatch(5);
-    expect(latch.locked()).toEqual(true);
+    expect(latch.locked).toEqual(true);
   });
 
   test("should released when count = 0", () => {
@@ -23,6 +23,6 @@ describe("countdown-latch", () => {
     for (let index = 0; index < count; index++) {
       latch.countdown();
     }
-    expect(latch.released()).toEqual(true);
+    expect(latch.released).toEqual(true);
   });
 });

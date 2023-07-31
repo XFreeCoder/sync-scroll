@@ -45,28 +45,30 @@ const Cell = () => {
 };
 
 const Block = ({
+  rows = 36,
   cellHeight,
+  cols = 48,
   cellWidth,
-  height = 480,
   width = 500,
+  height = 480,
 }: {
+  rows?: number;
   cellHeight: number;
+  cols?: number;
   cellWidth: number;
   height?: number;
   width?: number;
 }) => {
   const synchronizer = useSynchronizer();
   const ref = useSyncScroll({ synchronizer });
-  const rows = Math.ceil(height / cellHeight) * 2;
-  const cols = Math.ceil(width / cellWidth) * 2;
 
   return (
     <div
       ref={ref}
       style={{
         overflow: "auto",
-        width: 500,
-        height: 480,
+        width,
+        height
       }}
     >
       <div

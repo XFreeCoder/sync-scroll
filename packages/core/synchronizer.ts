@@ -20,7 +20,7 @@ export class Synchronizer {
 
   register = (element: ScrollableElement) => {
     const handler = (ratio: ScrollRatio) => {
-      if (this.signal.released()) {
+      if (this.signal.released) {
         this.signal = new CountDownLatch(this.handlers.size - 1);
         [...this.handlers.keys()]
           .filter((ele) => ele !== element)

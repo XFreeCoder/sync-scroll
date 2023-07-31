@@ -1,12 +1,12 @@
 export class Ratio {
-  private _value = 0;
+  #value: number;
   get value() {
-    return this._value;
+    return this.#value;
   }
   set value(ratio: number) {
     try {
       this.verifyRatio(ratio);
-      this._value = ratio;
+      this.#value = ratio;
     } catch (error) {
       throw error;
     }
